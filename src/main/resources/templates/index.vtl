@@ -1,0 +1,19 @@
+
+<table class="table table-hover sortable" id="restaurantTable">
+  <thead>
+    <tr>
+      <th>Restaurant List</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      #foreach ($restaurant in $restaurants)
+      <td><a href="/index/$restaurant.getId()">$restaurant.getName()</a></td>
+    </tr>
+      #end
+  </tbody>
+</table>
+<br>
+
+<a href="/newrestaurant">Add A New Restaurant</a>
+<a href="/cuisines">Search By Cuisine</a>

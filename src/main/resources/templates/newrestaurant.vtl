@@ -1,0 +1,12 @@
+<h1>Add a New Restaurant</h1>
+
+<form action="/" class="form-horizontal" method="post">
+  <label for="newRestaurant">Enter Restaurant Here:</label>
+  <input id="newRestaurantName" name="newRestaurantName" type="text"><br>
+<br>
+#foreach ($cuisine in $cuisines)
+  <input type="radio" id="newRestaurantCuisineId" name="newRestaurantCuisineId" value="$cuisine.getId()">$cuisine.getType()<br>
+#end
+
+  <button type="submit" class="btn btn-info">Add Restaurant</button>
+</form>
