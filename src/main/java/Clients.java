@@ -1,12 +1,12 @@
 import org.sql2o.*;
 import java.util.List;
 
-public class Restaurant {
+public class Clients {
   private int mId;
   private String mName;
-  private int mCuisineId;
+  private int mStylistId;
 
-  public Restaurant (String name, int cuisineId) {
+  public Clients (String name, int cuisineId) {
     this.mName = name;
     this.mCuisineId = cuisineId;
   }

@@ -3,18 +3,18 @@ import java.util.List;
 
 public class Stylists {
   private int mId;
-  private String mType;
+  private String mName;
 
   public Stylists (String type) {
-    this.mType = type;
+    this.mName = name;
   }
 
   public int getId() {
     return mId;
   }
 
-  public String getType() {
-    return mType;
+  public String getName() {
+    return mName;
   }
 
 
@@ -24,7 +24,7 @@ public class Stylists {
       return false;
     } else {
       Stylists newStylists = (Stylists) otherStylists;
-      return this.getType().equals(newStylists.getType()) &&
+      return this.getName().equals(newStylists.getName()) &&
         this.getId() == newStylists.getId();
     }
   }
@@ -32,9 +32,9 @@ public class Stylists {
   //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO cuisine(type) VALUES (:type)";
+      String sql = "INSERT INTO stylists(name) VALUES (:name)";
       this.mId = (int) con.createQuery(sql, true)
-        .addParameter("type", this.mType)
+        .addParameter("name", this.mName)
         .executeUpdate()
         .getKey();
     }
@@ -42,7 +42,7 @@ public class Stylists {
 
   //READ
   public static List<Stylists> all() {
-    String sql = "SELECT id AS mId, type AS mType FROM cuisine";
+    String sql = "SELECT id AS mId, name AS mName FROM stylists";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Stylists.class);
     }
@@ -51,7 +51,7 @@ public class Stylists {
   //FIND
   public static Stylists find(int id) {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, type AS mType FROM cuisine WHERE id=:id";
+      String sql = "SELECT id AS mId, name AS mName FROM stylists WHERE id=:id";
       Stylists myStylists = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Stylists.class);
@@ -61,12 +61,12 @@ public class Stylists {
 
 
   //UPDATE
-  public void update(String newType) {
-    this.mType = newType;
+  public void update(String newName) {
+    this.mName = newName;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE cuisine SET type = :newType WHERE id = :id";
+      String sql = "UPDATE stylists SET name = :newName WHERE id = :id";
       con.createQuery(sql)
-        .addParameter("newType", newType)
+        .addParameter("newName", newName)
         .addParameter("id", this.mId)
         .executeUpdate();
     }
@@ -75,7 +75,7 @@ public class Stylists {
   //DELETE
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM cuisine WHERE id = :id";
+      String sql = "DELETE FROM stylists WHERE id = :id";
       con.createQuery(sql)
         .addParameter("id", this.mId)
         .executeUpdate();
@@ -83,12 +83,12 @@ public class Stylists {
   }
 
   //GET RESTAURANTS
-  public List<Restaurant> getRestaurants() {
+  public List<Clients> getClients() {
     try(Connection con =DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName, cuisine_id AS myStylistsId FROM restaurants WHERE cuisine_id=:id";
+      String sql = "SELECT id AS mId, name AS mName, stylists_id AS myStylistsId FROM restaurants WHERE stylists_id=:id";
       return con.createQuery(sql)
         .addParameter("id", this.mId)
-        .executeAndFetch(Restaurant.class);
+        .executeAndFetch(Clients.class);
     }
   }
 
