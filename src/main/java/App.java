@@ -12,25 +12,25 @@ public class App {
 
     get("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("restaurants", Restaurant.all());
+      model.put("clients", Clients.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/newrestaurant", (request, reponse) -> {
+    get("/newclient", (request, reponse) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      model.put("cuisines", Cuisine.all());
-      model.put("template", "templates/newrestaurant.vtl");
+      model.put("stylists", Stylists.all());
+      model.put("template", "templates/newclient.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
     post("/", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
-      String newRestaurantName = request.queryParams("newRestaurantName");
-      int newRestaurantCuisineId = Integer.parseInt(request.queryParams("newRestaurantCuisineId"));
-      Restaurant newRestaurant = new Restaurant(newRestaurantName, newRestaurantCuisineId);
-      newRestaurant.save();
-      model.put("restaurants", Restaurant.all());
+      String newClientsName = request.queryParams("newClientsName");
+      int newClientsStylistsId = Integer.parseInt(request.queryParams("newClientsStylistsId"));
+      Clients newClients = new Clients(newClientsName, newClientsStylistsId);
+      newClients.save();
+      model.put("clients", Clients.all());
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -38,7 +38,7 @@ public class App {
   //   /******************************************************
   //   STUDENTS:
   //   TODO: Create page to display information about the selected restaurant
-  //   TODO: Create page to display restaurants by cuisine type
+  //   TODO: Create page to display clients by cuisine type
   //   *******************************************************/
   //
   }

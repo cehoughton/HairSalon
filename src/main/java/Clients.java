@@ -4,11 +4,11 @@ import java.util.List;
 public class Clients {
   private int mId;
   private String mName;
-  private int mStylistId;
+  private int mStylistsId;
 
-  public Clients (String name, int cuisineId) {
+  public Clients (String name, int stylistsId) {
     this.mName = name;
-    this.mCuisineId = cuisineId;
+    this.mStylistsId = stylistsId;
   }
 
   public int getId() {
@@ -19,49 +19,49 @@ public class Clients {
     return mName;
   }
 
-  public int getCuisineId() {
-    return mCuisineId;
+  public int getStylistsId() {
+    return mStylistsId;
   }
 
   @Override
-  public boolean equals(Object otherRestaurant){
-    if (!(otherRestaurant instanceof Restaurant)) {
+  public boolean equals(Object otherClients){
+    if (!(otherClients instanceof Clients)) {
       return false;
     } else {
-      Restaurant newRestaurant = (Restaurant) otherRestaurant;
-      return this.getName().equals(newRestaurant.getName()) &&
-             this.getId() == newRestaurant.getId() &&
-             this.getCuisineId() == newRestaurant.getCuisineId();
+      Clients newClients = (Clients) otherClients;
+      return this.getName().equals(newClients.getName()) &&
+             this.getId() == newClients.getId() &&
+             this.getStylistsId() == newClients.getStylistsId();
     }
   }
   //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO restaurants (name, cuisine_id) VALUES (:name, :cuisine_id)";
+      String sql = "INSERT INTO clients (name, stylists_id) VALUES (:name, :stylists_id)";
       this.mId = (int) con.createQuery(sql, true)
         .addParameter("name", this.mName)
-        .addParameter("cuisine_id", this.mCuisineId)
+        .addParameter("stylists_id", this.mStylistsId)
         .executeUpdate()
         .getKey();
     }
   }
 
   //READ
-  public static List<Restaurant> all() {
-    String sql = "SELECT id AS mId, name AS mName, cuisine_id AS mCuisineId FROM restaurants";
+  public static List<Clients> all() {
+    String sql = "SELECT id AS mId, name AS mName, stylists_id AS mStylistsId FROM cients";
     try (Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql).executeAndFetch(Restaurant.class);
+      return con.createQuery(sql).executeAndFetch(Clients.class);
     }
   }
 
   //FIND
-  public static Restaurant find(int id) {
+  public static Clients find(int id) {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName, cuisine_id AS mCuisineId FROM restaurants WHERE id=:id";
-      Restaurant myRestaurant = con.createQuery(sql)
+      String sql = "SELECT id AS mId, name AS mName, stylists_id AS mStylistsId FROM clients WHERE id=:id";
+      Clients myClients = con.createQuery(sql)
         .addParameter("id", id)
-        .executeAndFetchFirst(Restaurant.class);
-      return myRestaurant;
+        .executeAndFetchFirst(Clients.class);
+      return myClients;
     }
   }
 
@@ -69,7 +69,7 @@ public class Clients {
   public void update(String newName) {
     this.mName = newName;
     try(Connection con = DB.sql2o.open()) {
-      String sql = "UPDATE restaurants SET name = :newName WHERE id = :id";
+      String sql = "UPDATE clients SET name = :newName WHERE id = :id";
       con.createQuery(sql)
         .addParameter("newName", newName)
         .addParameter("id", this.mId)
@@ -80,7 +80,7 @@ public class Clients {
   //DELETE
   public void delete() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "DELETE FROM restaurants WHERE id = :id";
+      String sql = "DELETE FROM clients WHERE id = :id";
       con.createQuery(sql)
         .addParameter("id", this.mId)
         .executeUpdate();
@@ -88,8 +88,8 @@ public class Clients {
   }
 
   //GET CUISINE TYPE
-  public String getCuisineType() {
-    return Cuisine.find(mCuisineId).getType();
+  public String getStylistsType() {
+    return Stylists.find(mStylistsId).getType();
   }
 
 }
