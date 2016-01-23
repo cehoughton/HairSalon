@@ -5,7 +5,7 @@ public class Stylists {
   private int mId;
   private String mName;
 
-  public Stylists (String type) {
+  public Stylists (String name) {
     this.mName = name;
   }
 
@@ -85,7 +85,7 @@ public class Stylists {
   //GET RESTAURANTS
   public List<Clients> getClients() {
     try(Connection con =DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName, stylists_id AS myStylistsId FROM restaurants WHERE stylists_id=:id";
+      String sql = "SELECT id AS mId, name AS mName, stylistsid AS myStylistsId FROM restaurants WHERE stylistsid=:id";
       return con.createQuery(sql)
         .addParameter("id", this.mId)
         .executeAndFetch(Clients.class);
