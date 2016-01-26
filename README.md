@@ -1,8 +1,8 @@
-# Best Restaurants
+# Hair Salon
 
 ##### Epicodus exercise using Java and Postgres, 01.21.2016
 
-##### Author Names
+##### Chris Houghton
 
 ## Description
 Add a description here
@@ -13,7 +13,7 @@ Clone this repository:
 ```
 $ cd ~/Desktop
 $ git clone https://github.com/LINK_TO_YOUR_REPO
-$ cd best-restaurants
+$ cd Hair Salon
 ```
 
 Open terminal and run Postgres:
@@ -24,8 +24,8 @@ $ postgres
 Open a new tab in terminal and create the `best-restaurants` database:
 ```
 $ psql
-$ CREATE DATABASE best_restaurants;
-$ psql best_restaurants < best_restaurants.sql
+$ CREATE DATABASE hair_salon;
+$ psql hair_salon < hair_salon.sql
 ```
 
 Navigate back to the directory where this repository has been cloned and run gradle:
@@ -35,7 +35,7 @@ $ gradle run
 
 ## Legal
 
-Copyright (c) 2015 Author names go here
+Copyright (c) 2015 Chris Houghton
 
 This software is licensed under the MIT license.
 
