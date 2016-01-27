@@ -34,7 +34,21 @@ public class App {
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-  //
+
+    get("/stylists",(request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("stylists", Stylists.all());
+      model.put("template", "templates/stylists.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/stylists", (request,response) -> {
+     Map<String, Object> model = new HashMap<String, Object>();
+     Stylists stylists = new Stylists(request.queryParams("newStylists"));
+     model.put("stylists", Stylists.all());
+     model.put("template", "templates/stylists.vtl");
+     return new ModelAndView(model, layout);
+   }, new VelocityTemplateEngine());
   //   /******************************************************
   //   STUDENTS:
   //   TODO: Create page to display information about the selected restaurant
