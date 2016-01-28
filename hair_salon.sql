@@ -36,7 +36,7 @@ SET default_with_oids = false;
 CREATE TABLE clients (
     id integer NOT NULL,
     name character varying,
-    stylistsid integer
+    stylists_id integer
 );
 
 
@@ -114,7 +114,7 @@ ALTER TABLE ONLY stylists ALTER COLUMN id SET DEFAULT nextval('stylists_id_seq':
 -- Data for Name: clients; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY clients (id, name, stylistsid) FROM stdin;
+COPY clients (id, name, stylists_id) FROM stdin;
 \.
 
 
@@ -130,6 +130,11 @@ SELECT pg_catalog.setval('clients_id_seq', 1, false);
 --
 
 COPY stylists (id, name) FROM stdin;
+1	ff
+2	fgfg
+3	ggggg
+4	cccc
+5	xxx
 \.
 
 
@@ -137,7 +142,7 @@ COPY stylists (id, name) FROM stdin;
 -- Name: stylists_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('stylists_id_seq', 1, false);
+SELECT pg_catalog.setval('stylists_id_seq', 5, true);
 
 
 --
