@@ -1,12 +1,20 @@
-<h1>Add a New Stylist</h1>
+<!-- <h1>Add a New Stylist</h1>
 
 <form action="/stylists" class="form-horizontal" method="post">
   <label for="newStylist">Enter Stylist Here:</label>
   <input id="newStylists" name="newStylists" type="text"><br>
 <br>
 #foreach ($client in $clients)
-  <input type="radio" id="newRestaurantCuisineId" name="newRestaurantCuisineId" value="$clients.getId()">$clients.getName()<br>
+  <input type="radio" id="newClientStylistId" name="newClientStylistId" value="$clients.getId()">$clients.getName()<br>
 #end
 
   <button type="submit" class="btn btn-info">Add Stylists</button>
-</form>
+</form> -->
+<h1>Stylists</h1>
+
+<ul>
+#foreach($stylist in $stylists)
+ <li><a href="/stylists/$stylists.getId()">$stylist.getName()</a></li>
+#end
+
+<a href="/">Add stylist</a>

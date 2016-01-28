@@ -14,21 +14,21 @@ public class ClientsTest {
 
   @Test
   public void equals_returnsTrueIfNamesAreTheSame() {
-    Clients firstClients = new Clients("Dominoes", 1);
-    Clients secondClients = new Clients("Dominoes", 1);
+    Clients firstClients = new Clients("Jim", 1);
+    Clients secondClients = new Clients("Jim", 1);
     assertTrue(firstClients.equals(secondClients));
   }
 
   @Test
   public void save_savesIntoDatabase_true() {
-    Clients myClients = new Clients("Dominoes", 1);
+    Clients myClients = new Clients("Sam", 1);
     myClients.save();
     assertTrue(Clients.all().get(0).equals(myClients));
   }
 
   @Test
     public void find_findClientsInDatabase_true() {
-      Clients myClients = new Clients("Dominoes", 1);
+      Clients myClients = new Clients("Frank", 1);
       myClients.save();
       Clients savedClients = Clients.find(myClients.getId());
       assertTrue(myClients.equals(savedClients));
@@ -50,12 +50,12 @@ public class ClientsTest {
     assertEquals(0, Clients.all().size());
   }
 
-  // @Test
-  //   public void getStylistsName_retrievesCuisineTypeofClientsFromDatabase_cuisineList() {
-  //     Cuisine myCuisine = new Cuisine("Pizza");
-  //     myCuisine.save();
-  //     Clients myClients = new Clients("Eddie's", myStylists.getId());
-  //     myClients.save();
-  //     assertEquals("Pizza", myClients.getStylistsName());
-  //   }
+  @Test
+    public void getStylistsName_retrievesStylistNameofClientsFromDatabase_stylistName() {
+      Stylists myStylists = new Stylists("Simone");
+      myStylists.save();
+      Clients myClients = new Clients("Eddie", myStylists.getId());
+      myClients.save();
+      assertEquals("Simone", myClients.getStylistsName());
+    }
 }

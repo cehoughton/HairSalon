@@ -6,9 +6,9 @@ public class Clients {
   private String mName;
   private int mStylistsId;
 
-  public Clients (String name, int stylistsId) {
+  public Clients (String name, int stylists_id) {
     this.mName = name;
-    this.mStylistsId = stylistsId;
+    this.mStylistsId = stylists_id;
   }
 
   public int getId() {
@@ -37,10 +37,10 @@ public class Clients {
   //CREATE
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO clients (name, stylistsid) VALUES (:name, :stylistsid)";
+      String sql = "INSERT INTO clients (name, stylists_id) VALUES (:name, :stylists_id)";
       this.mId = (int) con.createQuery(sql, true)
         .addParameter("name", this.mName)
-        .addParameter("stylistsid", this.mStylistsId)
+        .addParameter("stylists_id", this.mStylistsId)
         .executeUpdate()
         .getKey();
     }
@@ -48,7 +48,7 @@ public class Clients {
 
   //READ
   public static List<Clients> all() {
-    String sql = "SELECT id AS mId, name AS mName, stylistsid AS mStylistsId FROM clients";
+    String sql = "SELECT id AS mId, name AS mName, stylists_id AS mStylistsId FROM clients";
     try (Connection con = DB.sql2o.open()) {
       return con.createQuery(sql).executeAndFetch(Clients.class);
     }
@@ -57,7 +57,7 @@ public class Clients {
   //FIND
   public static Clients find(int id) {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName, stylistsid AS mStylistsId FROM clients WHERE id=:id";
+      String sql = "SELECT id AS mId, name AS mName, stylists_id AS mStylistsId FROM clients WHERE id=:id";
       Clients myClients = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Clients.class);
@@ -87,7 +87,7 @@ public class Clients {
     }
   }
 
-  //GET CUISINE TYPE
+
   public String getStylistsName() {
     return Stylists.find(mStylistsId).getName();
   }
