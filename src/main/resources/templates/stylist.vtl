@@ -1,0 +1,18 @@
+<h1>$stylist.getName()</h1>
+
+
+<ul>
+#foreach($client in $stylist.getClients())
+ <li>$client.getNewClient()</li>
+ #end
+</ul>
+
+<form action="/clients/$stylist.getId()" method="post">
+  <input id="stylistId" name="stylistId" type="hidden" value="$stylist.getId()">
+
+  <div class="form-group">
+    <label for="newClient">Enter name</label>
+    <input id="newClient" name="newClient" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">go</button>
+</form>

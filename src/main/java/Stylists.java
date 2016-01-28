@@ -85,7 +85,7 @@ public class Stylists {
   //GET Clients
   public List<Clients> getClients() {
     try(Connection con =DB.sql2o.open()) {
-      String sql = "SELECT id AS mId, name AS mName, stylists_id AS myStylistsId FROM clients WHERE stylists_id=:id";
+      String sql = "SELECT id AS mId, name AS mName, stylists_id AS mStylistsId FROM clients WHERE stylists_id=:id";
       return con.createQuery(sql)
         .addParameter("id", this.mId)
         .executeAndFetch(Clients.class);
