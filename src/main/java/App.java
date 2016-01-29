@@ -25,6 +25,13 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/clients",(request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("clients", Clients.all());
+      model.put("template", "templates/clients.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
 
     post("/stylists", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
@@ -38,10 +45,11 @@ public class App {
     post("/clients/:id", (request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
       String newClient = request.queryParams("newClient");
-      int newClientStylistsId = Integer.parseInt(request.queryParams("newClientStylistsId"));
+      int newClientStylistsId = Integer.parseInt(request.queryParams("stylistId"));
       Clients client = new Clients(newClient, newClientStylistsId);
       client.save();
       model.put("clients", Clients.all());
+      model.put("stylists",Stylists.all());
       model.put("template", "templates/clients.vtl");
 
       return new ModelAndView(model, layout);
