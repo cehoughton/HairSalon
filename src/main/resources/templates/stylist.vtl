@@ -2,15 +2,11 @@
 
 <h1>Clients</h1>
 
-<ul>
-#foreach ($client in $clients)
- <li>$client.getName()</li>
- #end
- </ul>
+
 
 <ul>
 #foreach($client in $stylist.getClients())
- <li>$client.getNewClient()</li>
+ <li>$client.getName()</li>
  #end
 </ul>
 

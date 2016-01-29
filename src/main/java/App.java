@@ -27,6 +27,7 @@ public class App {
 
     get("/clients",(request, response) -> {
       HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("stylists",Stylists.all());
       model.put("clients", Clients.all());
       model.put("template", "templates/clients.vtl");
       return new ModelAndView(model, layout);
@@ -59,7 +60,7 @@ public class App {
     get("/stylists/:id", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       Stylists thisStylist = Stylists.find(Integer.parseInt(request.params(":id")));
-
+      model.put("clients", Clients.all());
       model.put("stylist", thisStylist);
       model.put("template", "templates/stylist.vtl");
       return new ModelAndView(model, layout);
