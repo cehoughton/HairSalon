@@ -1,33 +1,9 @@
-<h1>Add a Stylist</h1>
+<h1>Stylists</h1>
 
+<ul>
+#foreach($stylist in $stylists)
+ <li><a href="/stylist/$stylist.getId()">$stylist.getName()</a></li>
+#end
+</ul>
 
-<form action="/stylists" method="post">
-  <div class="form-group">
-    <label for="stylist">Enter Name</label>
-    <input id="stylist" name="stylist" class="form-control" type="text">
-  </div>
-  <button type="submit" class="btn">Next</button>
-
-  <br>
-
-  <a href="/stylists">View Stylists</a>
-
-
-<!-- <table class="table table-hover sortable" id="stylists">
-  <thead>
-    <tr>
-      <th>Client List</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      #foreach ($client in $clients)
-      <td><a href="/index/$client.getId()">$clients.getName()</a></td>
-    </tr>
-      #end
-  </tbody>
-</table>
-<br>
-
-<a href="/newclient">Add A New Client</a>
-<a href="/stylists">Search By Stylist</a> -->
+<a href="/newStylist">Add stylist</a>
